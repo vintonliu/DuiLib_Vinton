@@ -23,7 +23,7 @@
 	<Control parent="" notifies="setfocus killfocus timer menu windowinit(root)">
 		<Attribute name="name" default="" type="STRING" comment="控件名字，同一窗口内必须唯一，如(testbtn)"/>
 		<Attribute name="pos" default="0,0,0,0" type="RECT" comment="位置，如果为float控件则指定位置和大小，否则只指定大小,如(0,0,100,100)"/>
-		<Attribute name="padding" default="0,0,0,0" type="RECT" comment="外边距,如(2,2,2,2)"/>
+		<Attribute name="padding" default="0,0,0,0" type="RECT" comment="外边距,如(左2,上2,右2,下2)"/>
 		<Attribute name="bkcolor" default="0x00000000" type="DWORD" comment="背景颜色,如(0xFFFF0000)"/>
 		<Attribute name="bkcolor2" default="0x00000000" type="DWORD" comment="背景渐变色2,和bkcolor配合使用,如(0xFFFFFF00)"/>
 		<Attribute name="bkcolor3" default="0x00000000" type="DWORD" comment="背景渐变色3,和bkcolor、bkcolor2配合使用,如(0xFFFF00FF)"/>
@@ -121,7 +121,7 @@
 		<Attribute name="inset" default="0,0,0,0" type="RECT" comment="容器的内边距,如(2,2,2,2)"/>
 		<Attribute name="vscrollbar" default="false" type="BOOL" comment="是否使用竖向滚动条,如(true)"/>
 		<Attribute name="hscrollbar" default="false" type="BOOL" comment="是否使用横向滚动条,如(true)"/>
-		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的额外距离,如(4)"/>
+		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的纵向间隔,如(4)"/>
 		<Attribute name="sepheight" default="0" type="INT" comment="分隔符高度,正负表示分隔符在顶部还是底部,如(4)"/>
 		<Attribute name="sepimm" default="false" type="BOOL" comment="拖动分隔符是否立即改变大小,如(false)"/>
 	</VerticalLayout>
@@ -157,7 +157,7 @@
 		<Attribute name="inset" default="0,0,0,0" type="RECT" comment="容器的内边距,如(2,2,2,2)"/>
 		<Attribute name="vscrollbar" default="false" type="BOOL" comment="是否使用竖向滚动条,如(true)"/>
 		<Attribute name="hscrollbar" default="false" type="BOOL" comment="是否使用横向滚动条,如(true)"/>
-		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的额外距离,如(4)"/>
+		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的横向间隔,如(4)"/>
 		<Attribute name="sepwidth" default="0" type="INT" comment="分隔符宽,正负表示分隔符在左边还是右边,如(-4)"/>
 		<Attribute name="sepimm" default="false" type="BOOL" comment="拖动分隔符是否立即改变大小,如(false)"/>
 	</HorizontalLayout>
@@ -193,7 +193,7 @@
 		<Attribute name="inset" default="0,0,0,0" type="RECT" comment="容器的内边距,如(2,2,2,2)"/>
 		<Attribute name="vscrollbar" default="false" type="BOOL" comment="是否使用竖向滚动条,如(true)"/>
 		<Attribute name="hscrollbar" default="false" type="BOOL" comment="是否使用横向滚动条,如(true)"/>
-		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的额外距离,如(4)"/>
+		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的行与行之间的间隔,如(4)"/>
 		<Attribute name="columns" default="1" type="INT" comment="列数,如(4)"/>
 		<Attribute name="itemsize" default="0,0" type="SIZE" comment="子项固定大小，如(128,128)"/>
 	</TileLayout>
