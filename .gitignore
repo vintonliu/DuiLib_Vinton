@@ -31,3 +31,4 @@ QQDemo/Debug/mt.dep
 *.sdf
 DuiLib.v12.suo
 DuiLib.opensdf
+*.ipch

@@ -118,7 +118,7 @@ bool CComboBodyUI::DoPaint(HDC hDC, const RECT& rcPaint, CControlUI* pStopContro
 //
 //
 
-class CComboWnd : public CWindowWnd
+class CComboWnd : public CWindowWnd, public INotifyUI
 {
 public:
     void Init(CComboUI* pOwner);
@@ -126,6 +126,8 @@ public:
     void OnFinalMessage(HWND hWnd);
 
     LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
+    /* Redrain: 修复combo控件打开下拉菜单后不会自动定位到上次选择的位置上的bug */
+    void Notify(TNotifyUI& msg);
 
     void EnsureVisible(int iIndex);
     void Scroll(int dx, int dy);
@@ -205,6 +207,15 @@ void CComboWnd::OnFinalMessage(HWND hWnd)
     delete this;
 }
 
+void CComboWnd::Notify(TNotifyUI& msg) 
+{
+    /* Redrain: 修复combo控件打开下拉菜单后不会自动定位到上次选择的位置上的bug */
+    if (_tcscmp(msg.sType, DUI_MSGTYPE_WINDOWINIT) == 0)
+    {
+        EnsureVisible(m_iOldSel);
+    }
+}
+
 LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if( uMsg == WM_CREATE ) {
@@ -230,6 +241,9 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
             m_pLayout->Add(static_cast<CControlUI*>(m_pOwner->GetItemAt(i)));
         }
         m_pm.AttachDialog(m_pLayout);
+
+        /* Redrain: 修复combo控件打开下拉菜单后不会自动定位到上次选择的位置上的bug */
+        m_pm.AddNotifier(this);
         
         return 0;
     }

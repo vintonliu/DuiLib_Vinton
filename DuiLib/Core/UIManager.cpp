@@ -659,6 +659,7 @@ bool CPaintManagerUI::PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam,
     for( int i = 0; i < m_aPreMessageFilters.GetSize(); i++ ) 
     {
         bool bHandled = false;
+        /* 这里调用接口 IMessageFilterUI::MessageHandler 来进行消息过滤 */
         LRESULT lResult = static_cast<IMessageFilterUI*>(m_aPreMessageFilters[i])->MessageHandler(uMsg, wParam, lParam, bHandled);
         if( bHandled ) {
             return true;
@@ -1736,6 +1737,7 @@ void CPaintManagerUI::MessageLoop()
 {
     MSG msg = { 0 };
     while( ::GetMessage(&msg, NULL, 0, 0) ) {
+        /* CPaintManagerUI::TranslateMessage进行消息过滤 */
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
 			::DispatchMessage(&msg);
@@ -3505,7 +3507,7 @@ bool CPaintManagerUI::TranslateMessage(const LPMSG pMsg)
 	UINT uStyle = GetWindowStyle(pMsg->hwnd);
 	UINT uChildRes = uStyle & WS_CHILD;	
 	LRESULT lRes = 0;
-	if (uChildRes != 0)
+	if (uChildRes != 0) /* 判断子窗口还是父窗口 */
 	{
 		HWND hWndParent = ::GetParent(pMsg->hwnd);
 		//code by redrain 2014.12.3,解决edit和webbrowser按tab无法切换焦点的bug
@@ -3522,6 +3524,7 @@ bool CPaintManagerUI::TranslateMessage(const LPMSG pMsg)
 					if (pT->TranslateAccelerator(pMsg))
 						return true;
 
+                    // 这里进行消息过滤
 					pT->PreMessageHandler(pMsg->message, pMsg->wParam, pMsg->lParam, lRes);
 					// 					if( pT->PreMessageHandler(pMsg->message, pMsg->wParam, pMsg->lParam, lRes) ) 
 					// 						return true;
